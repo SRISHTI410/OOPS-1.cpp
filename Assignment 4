@@ -1,0 +1,255 @@
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+	void book(int x)
+		{
+				try
+				{
+				    if(x>100)
+
+				        throw x;
+				        else
+				        {
+				            cout<<"no exception.";
+				        }
+				}
+				    catch(int x)
+				    {
+				        cout<<"exception caught.";
+				    }
+				}
+
+
+
+class ride{
+	public:
+		string name,add;
+		int age;
+		
+		virtual void book()      //virtual function//
+		{
+			cout<<"enter name: "<<endl;
+			cin>>name;
+			cout<<"enter age: "<<endl;
+			cin>>age;
+			cout<<"enter address: "<<endl;
+			cin>>add;
+		} 
+		
+};
+
+class bike:public ride
+{
+    
+	public:
+	
+		int ch,p1;
+		void book()
+		{
+			cout<<"\nBike service is upto 30 kms";
+
+			cout<<"\nEnter the distance: "; 
+				cin>>ch;
+				if(1<=ch<=30)
+				{
+
+					p1=40;
+					cout<<"\nYou have booked mini car and price: "<<p1<<endl; 
+				    
+				}
+			
+		
+
+			else
+			{
+			    cout<<"Book Car.";
+			}
+		
+			
+		}
+};
+
+class car
+{
+    public:
+  
+
+		int ch1,p;
+		void book1()
+		{
+			cout<<"Car service.";
+			cout<<"\nEnter the distance: "; 
+				cin>>ch1;
+				if(31<=ch1<=50)
+				{
+
+					p=290;
+					cout<<"\nYou have booked mini car and price is: "<<p<<endl; }
+			
+		}
+
+};
+
+class receipt: public bike,public car
+{
+	public:
+	receipt()
+	{
+	    cout<<"WELCOME";
+	}
+		void bill()
+		{
+			ofstream outf;
+			outf.open("C:\\Users\\KIIT\\OneDrive\\Documents\\records.txt");
+
+			{
+				outf<<"receipt\n"<<endl;
+				outf<<"\ncustomer Name: \n"<<name<<endl;
+				outf<<"\nage: \n"<<age;
+				outf<<"\naddress: "<<add;
+				int p2=290+40;
+				outf<<"price: "<<p2<<endl;
+
+			}
+			outf.close();
+		}
+		void display(){
+		    const int N=80;
+			char line[N];
+			ifstream ifs;
+			ifs.open("C:\\Users\\KIIT\\OneDrive\\Documents\\records.txt");
+				
+				while(!ifs.eof())
+				{
+					ifs.getline(line,N);
+					cout<<line;
+				}
+			
+			ifs.close();
+		}
+};
+
+class B;                                               //operator overloading and type conversion//
+      
+          class A 
+{
+    protected :
+        int a ;
+    public :
+        A()
+        {
+            a=5;
+        }
+        int get()
+        {
+            cout<<"\n A = "<<a;
+            return a;
+        }
+        
+
+};
+
+class B
+{
+    protected : 
+        int b;
+    public :
+        B()
+        {
+            b=0;
+        }
+
+        void operator =(A oba) //A to B
+        {
+            cout<<"Operator overloading and type conversion: ";
+            cout<<"\n b : "<<b;
+            b = oba.get() + 10;
+            cout<<"\n b : "<<b;
+        }
+};
+
+template <class T>
+
+void func(T q)
+{
+    cout<<"\nTemplate and function overload: ";
+    cout <<"\n"<< q << "\n";
+}
+void func(int q)
+{
+    cout <<"\n"<< q << "\n";
+}
+
+    
+
+int main()
+{
+    int exc;
+    cout<<"Exception occurs if we have value greater than 100.";
+    cout<<"enter value: ";
+    cin>>exc;
+    book(exc);
+	int c;
+	int a;
+    A obja;
+    B  objb;
+    objb= obja; //A converts to B
+    
+    
+   func("Hello");
+   func(10);
+  
+do
+	{
+	    
+
+	cout<<"\n\t enter 1 to book bike"<<endl;
+		cout<<"\t enter 2 to book car"<<endl;
+	cout<<"\t enter 3 for receipt(for both car and bike)"<<endl;
+
+	cout<<"\t enter 4 to exit "<<endl;
+	cout<<"\nenter the choice"<<endl;
+	cin>>c;
+	ride *r;
+	bike b;
+receipt n;
+	switch(c)
+	{
+
+		
+		case 1:
+
+                r=&b;
+				cout<<"\nbookings using bike:"<<endl;
+				r->book();
+				break;
+
+			case 2:
+
+			   
+				cout<<"\nbookings using car:"<<endl;
+				n.car::book1();
+				break;
+
+		case 3:
+              n.ride::book();
+				n.bill();
+				n.display();
+
+			break;
+				
+ case 4:
+				cout<<"exit"<<endl;
+				return 0;
+			
+			default:
+			
+				cout<<"invalid"<<endl;
+				break;
+			
+
+} 
+}while(a);
+	return 0;
+}
